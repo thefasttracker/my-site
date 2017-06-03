@@ -18,15 +18,15 @@ import './styles/app.scss'
 // //app css
 // import 'style!css!sass!applicationStyles'
 
-// firebase.auth().onAuthStateChanged((user) => {
-// 	if (user) {
-// 		store.dispatch(actions.login(user.uid))
-// 		hashHistory.push('/')
-// 	} else {
-// 		store.dispatch(actions.logout())
-// 		hashHistory.push('/')
-// 	}
-// })
+firebase.auth().onAuthStateChanged((user) => {
+	if (user) {
+		// store.dispatch(actions.login(user.uid))
+		hashHistory.push('/')
+	} else {
+		// store.dispatch(actions.logout())
+		hashHistory.push('/login')
+	}
+})
 
 import configureStore from './store/configureStore';
 
