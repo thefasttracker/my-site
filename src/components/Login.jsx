@@ -7,6 +7,21 @@ class Login extends Component {
 		super();
 		
 	}
+
+	onGithubLogin = (e) => {
+		e.preventDefault();
+		e.stopPropagation() 
+		const { dispatch } = this.props
+		dispatch(actions.startLogin())
+	}
+
+	onGithubLogout = (e) => {
+		e.preventDefault();
+		e.stopPropagation()
+		const { dispatch } = this.props
+		dispatch(actions.startLogout())
+	}
+
 	onSubmitLogin = e => {
 		e.preventDefault();
 		if (
@@ -75,6 +90,20 @@ class Login extends Component {
 						>
 							Войти
 						</button>
+						<button
+								className="btn btn-sm"
+								type="submit"
+								onClick={this.onGithubLogin}
+							>
+								Войти с GitHub
+							</button>
+							<button
+								className="btn btn-sm"
+								type="submit"
+								onClick={this.onGithubLogout}
+							>
+								Logout
+							</button>
 					</form>
 				</div>
 			</div>

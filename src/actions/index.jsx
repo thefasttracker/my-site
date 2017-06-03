@@ -3,6 +3,7 @@ import moment from 'moment'
 import {hashHistory} from 'react-router'
 const API_URL = "http://localhost:3000";
 import axios from "axios";
+import firebase, { firebaseRef, githubProvider } from '../firebase'
 
 export function action1(payload) {
     return {
@@ -90,5 +91,39 @@ export const passRecoveryAjax = payload => {
 			});
 	};
 };
+
+export const login = (uid) => {
+  return {
+    type: 'LOGIN',
+    uid
+  }
+}
+
+export const startLogin = () => {
+	return (dispatch, getState) => {
+		return firebase.auth().signInWithPopup(githubProvider)
+		.then((result) => {
+			console.log('Auth done', result)
+		}, (error) => {
+			console.log('Unable to auth', error)
+		})
+	}
+}
+
+export const logout = () => {
+  return {
+    type: 'LOGOUT'
+  }
+}
+
+export const startLogout = () => {
+	return (dispatch, getState) => {
+		return firebase.auth().signOut()
+		.then(() => {
+			console.log('Logged out.')
+		})
+	}
+}
+
 
 
