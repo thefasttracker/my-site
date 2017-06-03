@@ -5,6 +5,8 @@ import { Provider } from 'react-redux'
 import { syncHistoryWithStore } from 'react-router-redux'
 
 import routes from './routes'
+import firebase from './firebase'
+import * as actions from './actions'
 
 // import './styles/bootstrap.min.css'
 import './styles/app.scss'
@@ -15,6 +17,16 @@ import './styles/app.scss'
 
 // //app css
 // import 'style!css!sass!applicationStyles'
+
+// firebase.auth().onAuthStateChanged((user) => {
+// 	if (user) {
+// 		store.dispatch(actions.login(user.uid))
+// 		hashHistory.push('/')
+// 	} else {
+// 		store.dispatch(actions.logout())
+// 		hashHistory.push('/')
+// 	}
+// })
 
 import configureStore from './store/configureStore';
 

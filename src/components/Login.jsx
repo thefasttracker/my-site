@@ -12,8 +12,29 @@ class Login extends Component {
 		e.preventDefault();
 		e.stopPropagation() 
 		const { dispatch } = this.props
-		dispatch(actions.startLogin())
+		dispatch(actions.startGithubLogin())
 	}
+
+	onGoogleLogin = (e) => {
+		e.preventDefault();
+		e.stopPropagation() 
+		const { dispatch } = this.props
+		dispatch(actions.startGoogleLogin())
+	}
+
+	onFacebookLogin = (e) => {
+		e.preventDefault();
+		e.stopPropagation() 
+		const { dispatch } = this.props
+		dispatch(actions.startFacebookLogin())
+	}
+
+	onTwitterLogin = (e) => {
+		e.preventDefault();
+		e.stopPropagation() 
+		const { dispatch } = this.props
+		dispatch(actions.startTwitterLogin())
+	}		
 
 	onGithubLogout = (e) => {
 		e.preventDefault();
@@ -90,20 +111,42 @@ class Login extends Component {
 						>
 							Войти
 						</button>
+						<p>Или авторизируйтесь с помощью:</p>
 						<button
-								className="btn btn-sm"
-								type="submit"
-								onClick={this.onGithubLogin}
-							>
-								Войти с GitHub
-							</button>
-							<button
-								className="btn btn-sm"
-								type="submit"
-								onClick={this.onGithubLogout}
-							>
-								Logout
-							</button>
+							className="btn btn-sm btn-default"
+							type="submit"
+							onClick={this.onGithubLogin}
+						>
+							GitHub
+						</button>
+						<button
+							className="btn btn-sm btn-info"
+							type="submit"
+							onClick={this.onGoogleLogin}
+						>
+							Google
+						</button>
+						<button
+							className="btn btn-sm btn-primary"
+							type="submit"
+							onClick={this.onFacebookLogin}
+						>
+							Facebook
+						</button>
+						<button
+							className="btn btn-sm btn-success"
+							type="submit"
+							onClick={this.onTwitterLogin}
+						>
+							Twitter
+						</button>
+						<button
+							className="btn btn-sm"
+							type="submit"
+							onClick={this.onGithubLogout}
+						>
+							Logout
+						</button>
 					</form>
 				</div>
 			</div>

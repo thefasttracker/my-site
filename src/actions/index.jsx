@@ -3,7 +3,12 @@ import moment from 'moment'
 import {hashHistory} from 'react-router'
 const API_URL = "http://localhost:3000";
 import axios from "axios";
-import firebase, { firebaseRef, githubProvider } from '../firebase'
+import firebase, { 
+	firebaseRef, 
+	githubProvider, 
+	googleProvider, 
+	facebookProvider, 
+	twitterProvider } from '../firebase'
 
 export function action1(payload) {
     return {
@@ -99,9 +104,42 @@ export const login = (uid) => {
   }
 }
 
-export const startLogin = () => {
+export const startGithubLogin = () => {
 	return (dispatch, getState) => {
 		return firebase.auth().signInWithPopup(githubProvider)
+		.then((result) => {
+			console.log('Auth done', result)
+		}, (error) => {
+			console.log('Unable to auth', error)
+		})
+	}
+}
+
+export const startGoogleLogin = () => {
+	return (dispatch, getState) => {
+		return firebase.auth().signInWithPopup(googleProvider)
+		.then((result) => {
+			console.log('Auth done', result)
+		}, (error) => {
+			console.log('Unable to auth', error)
+		})
+	}
+}
+
+export const startFacebookLogin = () => {
+	return (dispatch, getState) => {
+		return firebase.auth().signInWithPopup(facebookProvider)
+		.then((result) => {
+			console.log('Auth done', result)
+		}, (error) => {
+			console.log('Unable to auth', error)
+		})
+	}
+}
+
+ export const startTwitterLogin = () => {
+	return (dispatch, getState) => {
+		return firebase.auth().signInWithPopup(twitterProvider)
 		.then((result) => {
 			console.log('Auth done', result)
 		}, (error) => {
