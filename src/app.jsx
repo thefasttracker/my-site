@@ -19,6 +19,7 @@ import './styles/app.scss'
 import configureStore from './store/configureStore';
 
 const store = configureStore()
+store.subscribe(() => console.log("new state: ", store.getState()))
 const history = syncHistoryWithStore(hashHistory, store)
 
 ReactDOM.render(

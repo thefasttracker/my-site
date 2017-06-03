@@ -89,6 +89,15 @@ export default class NavHeader extends Component {
 									Login
 								</Link>
 							</li>
+							<li>
+								<Link
+									to="/signup"
+									activeClassName="active-link"
+									activeStyle={{ textDecoration: "none" }}
+								>
+									Регистрация
+								</Link>
+							</li>
 						</Nav>
 					</Navbar.Collapse>
 				</Navbar>

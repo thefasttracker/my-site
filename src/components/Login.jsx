@@ -1,38 +1,40 @@
 import React, { Component, PropTypes } from "react";
+import * as actions from "../actions";
+import { connect } from "react-redux";
 
-export default class Login extends Component {
+class Login extends Component {
 	constructor() {
 		super();
-		this.onSubmitLogin = this.onSubmitLogin.bind(this);
+		
 	}
 	onSubmitLogin = e => {
 		e.preventDefault();
 		if (
 			this.passInput.value.trim().length > 0 &&
-			this.userInput.value.trim().length > 0 &&
-			this.confirmPassword.value.trim().length > 0
+			this.userInput.value.trim().length > 0
 		) {
 			let input = {
 				user: this.userInput.value,
 				password: this.passInput.value,
-				confirmPassword: this.confirmPassword.value
 			};
-			console.log(input);
-
-			if (input.password !== input.confirmPassword) {
-				this.passInput.placeholder = "пароль не совпадает";
-				console.log("shiiiiit password");
-			} else {
-				this.passInput.placeholder = "Password";
-			}
+			let { dispatch } = this.props;
+			dispatch(actions.onLoginAjax(input))
+			
 		} else {
-			this.userInput.placeholder = "Введите имя";
+			this.userInput.placeholder = "Введите логин";
+			this.passInput.placeholder = "Введите пароль";
 		}
 
 		this.userInput.value = "";
 		this.passInput.value = "";
-		this.confirmPassword.value = "";
 	};
+
+	onPassRecovery = (e) => {
+		e.preventDefault()
+		let recoveryEmail = prompt("введите емайл")
+		let { dispatch } = this.props;
+		dispatch(actions.passRecoveryAjax(recoveryEmail))
+	}
 
 	render() {
 		return (
@@ -40,7 +42,7 @@ export default class Login extends Component {
 				{/*<h1>Login</h1>*/}
 				<div className="wrapper">
 					<form className="form-signin" onSubmit={this.onSubmitLogin}>
-						<h2 className="form-signin-heading">Please login</h2>
+						<h2 className="form-signin-heading">Войти</h2>
 						<input
 							type="text"
 							ref={input => {
@@ -48,7 +50,7 @@ export default class Login extends Component {
 							}}
 							className="form-control"
 							name="username"
-							placeholder="Username"
+							placeholder="Логин"
 							required
 							pattern="\w+"
 							title="Username must not be blank and contain only letters, numbers and underscores."
@@ -62,25 +64,16 @@ export default class Login extends Component {
 							}}
 							className="form-control"
 							name="password"
-							placeholder="Password"
+							placeholder="Пароль"
 							required
 							pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
 						/>
-						<input
-							type="password"
-							ref={input => {
-								this.confirmPassword = input;
-							}}
-							className="form-control"
-							name="confirmpassword"
-							placeholder="Confirm password"
-							required
-						/>
+						<p onClick={this.onPassRecovery}>Восстановить пароль</p>
 						<button
 							className="btn btn-lg btn-primary btn-block"
 							type="submit"
 						>
-							Login
+							Войти
 						</button>
 					</form>
 				</div>
@@ -88,6 +81,8 @@ export default class Login extends Component {
 		);
 	}
 }
+
+export default connect()(Login);
 
 /*<form onSubmit={this.handleSubmit}>
 					<input type="text" ref="introName" placeholder="What is your name?"/>

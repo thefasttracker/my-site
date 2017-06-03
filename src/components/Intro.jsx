@@ -27,6 +27,7 @@ class Intro extends Component {
 		return (
 			<div>
 				<h1>Intro</h1>
+				<h4>...cайт в разработке</h4>
 				<form onSubmit={this.textSubmit}>
 					<input
 						type="text"
